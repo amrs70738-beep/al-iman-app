@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تطبيق الإيمان</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f3f7f3;
+ color:#173d30;
+}
+header{
+ background:linear-gradient(135deg,#104b38,#207453);
+ color:white;
+ padding:30px 20px;
+ text-align:center;
+ border-radius:0 0 30px 30px;
+}
+header h1{font-size:30px;margin:5px}
+header p{color:#d8eee1}
+.container{max-width:650px;margin:auto;padding:18px}
+.card{
+ background:white;
+ padding:20px;
+ margin:15px 0;
+ border-radius:18px;
+ box-shadow:0 3px 12px #00000010;
+}
+h2{color:#176346}
+button{
+ border:0;
+ border-radius:12px;
+ padding:13px 20px;
+ background:#176346;
+ color:white;
+ font-size:16px;
+ cursor:pointer;
+ margin:5px;
+}
+button:active{transform:scale(.97)}
+nav{
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+ gap:5px;
+ margin:15px 0;
+}
+#count{font-size:55px;color:#176346;text-align:center}
+#zekrText{
+ font-size:24px;
+ line-height:2;
+ text-align:center;
+}
+.section{display:none}
+.section.active{display:block}
+footer{text-align:center;padding:25px;color:#678}
+</style>
+</head>
+<body>
+
+<header>
+<h1>☪ الإيمان</h1>
+<p>نور قلبك بذكر الله</p>
+<h3 id="today"></h3>
+</header>
+
+<div class="container">
+
+<nav>
+<button onclick="show('home')">الرئيسية</button>
+<button onclick="show('azkar')">الأذكار</button>
+<button onclick="show('tasbeeh')">السبحة</button>
+<button onclick="show('duaa')">الأدعية</button>
+</nav>
+
+<div id="home" class="section active">
+<div class="card">
+<h2>أهلاً بك في تطبيق الإيمان ❤️</h2>
+<p>ابدأ يومك بذكر الله، واجعل لسانك رطباً بذكره.</p>
+</div>
+<div class="card">
+<h2>ذكر اليوم</h2>
+<p id="daily">سبحان الله وبحمده، سبحان الله العظيم</p>
+</div>
+<div class="card">
+<h2>قال رسول الله ﷺ</h2>
+<p>«إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى»</p>
+</div>
+</div>
+
+<div id="azkar" class="section">
+<div class="card">
+<h2>أذكار مختارة</h2>
+<p id="zekrText">سبحان الله</p>
+<p style="text-align:center">عدد مرات الذكر: <b id="zcount">0</b></p>
+<div style="text-align:center">
+<button onclick="nextZekr()">الذكر التالي</button>
+<button onclick="resetZekr()">إعادة العد</button>
+</div>
+</div>
+</div>
+
+<div id="tasbeeh" class="section">
+<div class="card" style="text-align:center">
+<h2>السبحة الإلكترونية</h2>
+<div id="count">0</div>
+<button onclick="increment()">سبّح</button>
+<button onclick="reset()">تصفير</button>
+<p>اجعل لسانك دائماً بذكر الله</p>
+</div>
+</div>
+
+<div id="duaa" class="section">
+<div class="card">
+<h2>أدعية جميلة</h2>
+<p>اللهم اغفر لي ولوالدي وللمؤمنين والمؤمنات.</p>
+<hr>
+<p>اللهم ارزقني راحة البال وطمأنينة القلب.</p>
+<hr>
+<p>ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار.</p>
+<hr>
+<p>اللهم أعني على ذكرك وشكرك وحسن عبادتك.</p>
+</div>
+</div>
+
+</div>
+
+<footer>
+تطبيق الإيمان © 2026
+<br>
+نسأل الله أن يجعله عملاً صالحاً
+</footer>
+
+<script>
+function show(id){
+ document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+}
+let count=Number(localStorage.getItem('tasbeeh')||0);
+document.getElementById('count').innerText=count;
+function increment(){
+ count++;
+ document.getElementById('count').innerText=count;
+ localStorage.setItem('tasbeeh',count);
+}
+function reset(){
+ count=0;
+ document.getElementById('count').innerText=count;
+ localStorage.setItem('tasbeeh',count);
+}
+let azkar=['سبحان الله','الحمد لله','الله أكبر','لا إله إلا الله','أستغفر الله العظيم','اللهم صل وسلم على نبينا محمد'];
+let zi=0,znum=0;
+function nextZekr(){
+ zi=(zi+1)%azkar.length;
+ znum=0;
+ document.getElementById('zekrText').innerText=azkar[zi];
+ document.getElementById('zcount').innerText=znum;
+}
+function resetZekr(){
+ znum=0;
+ document.getElementById('zcount').innerText=znum;
+}
+document.getElementById('zekrText').addEventListener('click',()=>{
+ znum++;
+ document.getElementById('zcount').innerText=znum;
+});
+document.getElementById('today').innerText=new Date().toLocaleDateString('ar-EG');
+</script>
+</body>
+</html>
