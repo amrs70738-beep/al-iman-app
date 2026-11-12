@@ -1,0 +1,14 @@
+
+{
+  "name": "الإيمان - رفيق المسلم",
+  "short_name": "الإيمان",
+  "description": "تطبيق القرآن والصلاة والأذكار",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f3f7f4",
+  "theme_color": "#075b45",
+  "lang": "ar",
+  "dir": "rtl"
+}
